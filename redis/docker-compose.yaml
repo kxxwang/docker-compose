@@ -1,0 +1,12 @@
+version: '3'
+services:
+  redis:
+    image: redis:6.0
+    container_name: "redis6.0"
+    # restart: always
+    command: redis-server /etc/redis/my.cnf
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data:/data
+      - ./conf:/etc/redis
