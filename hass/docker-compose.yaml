@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  homeassistant:
+    image: hasscc/hacs:stable
+    container_name: homeassistant
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+      # - http_proxy=http://localhost:7890  # 代理服务在宿主机上的端口
+      # - https_proxy=http://localhost:7890  # 代理服务在宿主机上的端口
+      # - no_proxy=localhost,127.0.0.1,homeassistant  # 不通过代理的地址
+    volumes:
+      - /Users/wanghaichao/Documents/soft/hass/config:/config
+    ports:
+      - "8123:8123"
+    networks:
+      - homeassistant_network
+
+networks:
+  homeassistant_network:
+    driver: bridge
