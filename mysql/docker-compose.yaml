@@ -1,20 +1,17 @@
-version: '3'
+version: "3.8"
 services:
   mysql:
-    image: mysql:5.7.23
-    restart: always
-    container_name: "mysql5.7"
+    image: mysql:8.0
+    container_name: mysql8
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: "%"
     command:
+      --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
-      --collation-server=utf8mb4_general_ci
-      --explicit_defaults_for_timestamp=true
-      --lower_case_table_names=1
-      --max_allowed_packet=128M
-      --sql-mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO"
-    ports:
-      - 3306:3306
+      --collation-server=utf8mb4_unicode_ci
     volumes:
       - ./data:/var/lib/mysql
-      - ./log:/var/log/mysql
