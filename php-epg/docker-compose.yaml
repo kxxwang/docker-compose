@@ -1,0 +1,12 @@
+services:
+  php-epg:
+    image: ccr.ccs.tencentyun.com/taksss/php-epg:latest
+    container_name: php-epg
+    ports:
+      - "5678:80"
+    volumes:
+      - ./data:/htdocs/data
+    environment:
+      - PHP_MEMORY_LIMIT=512M
+      - ENABLE_FFMPEG=false
+    restart: unless-stopped
