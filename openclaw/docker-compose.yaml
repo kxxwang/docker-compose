@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  openclaw:
+    image: swr.cn-north-4.myhuaweicloud.com/ddn-k8s/ghcr.io/openclaw/openclaw:latest-linuxarm64
+    container_name: openclaw
+    ports:
+      - "127.0.0.1:18789:18789"
+    volumes:
+      - .openclaw:/home/node/.openclaw
+    command: openclaw gateway --port 18789 --allow-unconfigured
+    restart: unless-stopped
